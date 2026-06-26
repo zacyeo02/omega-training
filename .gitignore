@@ -9,3 +9,6 @@ server.log
 Thumbs.db
 .DS_Store
 desktop.ini
+
+# Local screenshot scratch output
+temporary screenshots/
