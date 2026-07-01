@@ -25,11 +25,16 @@ const server = http.createServer((req, res) => {
   let urlPath = decodeURIComponent(req.url.split("?")[0]);
   if (urlPath === "/") urlPath = "/index.html";
 
-  const filePath = path.join(root, urlPath);
+  let filePath = path.join(root, urlPath);
   if (!filePath.startsWith(root)) {
     res.writeHead(403);
     res.end("Forbidden");
     return;
+  }
+
+  // Clean-URL support to mirror the production .htaccess: /about-us -> about-us.html
+  if (!path.extname(filePath) && !fs.existsSync(filePath) && fs.existsSync(filePath + ".html")) {
+    filePath += ".html";
   }
 
   fs.readFile(filePath, (err, data) => {
