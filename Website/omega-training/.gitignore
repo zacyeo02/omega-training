@@ -1,0 +1,10 @@
+.vercel
+.env*
+node_modules
+temporary screenshots
+
+# local dev / preview helpers (not part of the deployed site)
+serve.mjs
+shot.mjs
+screenshot.mjs
+mobile-check.mjs

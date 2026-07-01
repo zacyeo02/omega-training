@@ -9,6 +9,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/styles.css">
+<link rel="icon" type="image/png" href="assets/logo-icon-orange.png">
+<link rel="apple-touch-icon" href="assets/logo-icon-orange.png">
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to main content</a>
@@ -53,9 +55,9 @@
     <div class="container">
       <div class="two-col" style="align-items: flex-start;">
         <div class="reveal">
-          <span class="eyebrow">Send an enquiry</span>
-          <h2 style="margin-top: 12px;">Book a course or callback</h2>
-          <form id="enquiry-form" style="margin-top: 28px;">
+          <h2>Book a course or callback</h2>
+          <form id="enquiry-form" action="contact.php" method="post" style="margin-top: 28px;">
+            <div class="form-status" role="status" aria-live="polite"></div>
             <div class="form-grid">
               <div class="field">
                 <label for="name">Full name</label>
@@ -89,13 +91,17 @@
                 <textarea id="message" name="message" rows="5" placeholder="Tell us a little about your team and what you need"></textarea>
               </div>
             </div>
+            <!-- Honeypot: hidden from people, tempting to bots. Real users leave it empty. -->
+            <div class="hp-field" aria-hidden="true">
+              <label for="company-url">Company website</label>
+              <input type="text" id="company-url" name="company_url" tabindex="-1" autocomplete="off" />
+            </div>
             <button type="submit" class="btn btn-primary" style="margin-top: 24px; width: 100%;">Send enquiry</button>
           </form>
         </div>
 
         <div class="reveal">
-          <span class="eyebrow">Contact details</span>
-          <h2 style="margin-top: 12px;">Talk to our team</h2>
+          <h2>Talk to our team</h2>
           <div class="contact-info" style="margin-top: 28px;">
             <div class="item">
               <div class="icon-dot"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7l9 6 9-6M5 5h14a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2z"/></svg></div>
@@ -107,7 +113,7 @@
             </div>
             <div class="item">
               <div class="icon-dot"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 1118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
-              <div><h4>Address</h4><p>40 to 42 Kemble Street, Prescot, L34 5SQ</p></div>
+              <div><h4>Address</h4><p>Unit L1, Prescot Business Park, L34 1QG</p></div>
             </div>
             <div class="item">
               <div class="icon-dot"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
@@ -158,7 +164,7 @@
       <div>
         <h4>Get in touch</h4>
         <ul class="footer-links">
-          <li>40 to 42 Kemble Street, Prescot, L34 5SQ</li>
+          <li>Unit L1, Prescot Business Park, L34 1QG</li>
           <li><a href="tel:01514870055">0151 487 0055</a></li>
           <li><a href="mailto:c.dyson@omegalife.uk">c.dyson@omegalife.uk</a></li>
         </ul>

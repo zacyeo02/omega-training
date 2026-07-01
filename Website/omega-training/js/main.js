@@ -41,16 +41,44 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const form = document.querySelector("#enquiry-form");
   if (form) {
-    form.addEventListener("submit", (e) => {
+    const status = form.querySelector(".form-status");
+    const button = form.querySelector("button[type='submit']");
+
+    const setStatus = (message, type) => {
+      if (!status) return;
+      status.textContent = message;
+      status.className = "form-status is-active is-" + type;
+      status.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    };
+
+    form.addEventListener("submit", async (e) => {
       e.preventDefault();
-      const button = form.querySelector("button[type='submit']");
       const original = button.textContent;
       button.textContent = "Sending...";
       button.disabled = true;
-      setTimeout(() => {
-        button.textContent = "Thanks, we'll be in touch";
-        form.querySelectorAll("input, select, textarea").forEach((f) => (f.disabled = true));
-      }, 900);
+
+      try {
+        const response = await fetch(form.action, {
+          method: "POST",
+          body: new FormData(form),
+          headers: { "Accept": "application/json" },
+        });
+        const data = await response.json().catch(() => ({}));
+
+        if (response.ok && data.ok) {
+          form.reset();
+          setStatus(data.message || "Thanks, your enquiry is on its way. We'll be in touch shortly.", "success");
+          button.textContent = "Enquiry sent";
+        } else {
+          setStatus(data.message || "Sorry, something went wrong. Please email c.dyson@omegalife.uk or call 0151 487 0055.", "error");
+          button.textContent = original;
+          button.disabled = false;
+        }
+      } catch (err) {
+        setStatus("We couldn't send that just now. Please email c.dyson@omegalife.uk or call 0151 487 0055.", "error");
+        button.textContent = original;
+        button.disabled = false;
+      }
     });
   }
 });
